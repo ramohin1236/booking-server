@@ -81,7 +81,7 @@ app.put('/user/:email', async (req, res) => {
         sameSite: process.env.NODE.ENV === 'production' ? 'none' : 'strict'
       })
         .send({success: true})
-        console.log("logout successfull");
+      
     }catch{
       res.status(500)
     }
@@ -93,7 +93,7 @@ app.post('/bookings', async(req,res)=>{
     const bookingData = req.body;
 
     const result = await bookingCollection.insertOne(bookingData);
-    console.log(result);
+   
     res.send(result)
 
 })
@@ -112,7 +112,7 @@ app.get('/bookings', async (req, res) => {
     }
 
     const booking = await bookingCollection.find(query).toArray()
-    console.log(booking)
+  
     res.send(booking)
   })
 
@@ -127,9 +127,20 @@ app.get('/user/:email', async(req,res)=>{
     }
 
     const user = await userCollection.findOne(query)
-   console.log(user);
+
     res.send(user)
 })
+
+
+// get all Users
+
+app.get('/users', async (req, res) => {
+   
+
+    const users = await userCollection.find().toArray()
+    console.log(users)
+    res.send(users)
+  })
 
 
 
