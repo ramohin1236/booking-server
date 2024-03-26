@@ -35,6 +35,7 @@ const client = new MongoClient(uri, {
   
       const userCollection =client.db('hotel-managment').collection('User')
       const bookingCollection =client.db('hotel-managment').collection('Bookings')
+      const homesCollection =client.db('hotel-managment').collection('Homes')
 
   
      // jwt generate
@@ -141,6 +142,19 @@ app.get('/users', async (req, res) => {
     console.log(users)
     res.send(users)
   })
+
+
+
+
+//   save a booking
+app.post('/homes', async(req,res)=>{
+    const homes = req.body;
+
+    const result = await homesCollection.insertOne(homes);
+   console.log(result);
+    res.send(result)
+
+})
 
 
 
